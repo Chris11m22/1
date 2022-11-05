@@ -19,9 +19,12 @@ public class Main {
         System.out.println("Cотрудник с максимальной зарплатой " + findMaxSalary());
         System.out.println("Среднее значение зарплат " + middleSalary());
         printfullNames();
+        salaryIncrease(10, employees);
+
 
 
     }
+
 
     public static void printArray() {
         for (int i = 0; i < employees.length; i++) {
@@ -50,39 +53,69 @@ public class Main {
                 minSalary = employees[i];
             }
         }
-            return minSalary;
-        }
+        return minSalary;
+    }
+
     public static Employee findMaxSalary() {
         Employee maxSalary = employees[0];
         double max = employees[0].getSalary();
         for (int i = 0; i < employees.length; i++) {
             if (employees[i] != null && employees[i].getSalary() > max) {
                 max = employees[i].getSalary();
-               maxSalary = employees[i];
+                maxSalary = employees[i];
             }
         }
         return maxSalary;
     }
+
     public static double middleSalary() {
         int counter = 0;
-            for (int i = 0; i < employees.length; i++) {
-                if (employees[i] != null) {
-                    counter++;
-                }
+        for (int i = 0; i < employees.length; i++) {
+            if (employees[i] != null) {
+                counter++;
             }
-            return salaruSum()/ counter ;
         }
-        public static void printfullNames() {
-            for (int i = 0; i < employees.length; i++) {
-                if (employees[i] != null) {
-                    System.out.println(employees[i].getName());
-                }
+        return salaruSum() / counter;
+    }
+
+    public static void printfullNames() {
+        for (int i = 0; i < employees.length; i++) {
+            if (employees[i] != null) {
+                System.out.println(employees[i].getName());
             }
+        }
+    }
 
+    public static void salaryIncrease(double rate, Employee[] employees) {
+        double c = 1 + rate / 100;
+        for (int i = 0; i < employees.length; i++) {
+            if (employees[i] != null) {
+                employees[i].setSalary(employees[i].getSalary() * c);
+            }
+        }
+    }
 
+    public static Employee[] searchByDepartment(int department) {
+        int person = 0;
+        for (int i = 0; i < employees.length; i++) {
+            if (employees[i] != null && employees[i].getDepartment() == department) {
+                person++;
+            }
+        }
+        Employee[] result = new Employee[person];
+        int number = 0;
+        for (int i = 0; i < employees.length; i++) {
+            if (employees[i] != null && employees[i].getDepartment() == department) {
+                result[number] = employees[i];
+                number++;
+            }
+        }
+        return result;
+    }
 
 }
-    }
+
+
 
 
 
